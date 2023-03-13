@@ -15,21 +15,31 @@ const getUsers = async(req,res) => {
 
 const postUser = async(req,res) => {
     
-    const { prenom,nom,telephone,mot_de_passe } = req.body
-    const rank = 1
+    const { prenom,nom,mot_de_passe } = req.body
+    const rank = '1'
+    console.log(req.body)
 
-    console.log(prenom,nom,telephone,mot_de_passe)
+    console.log(prenom,nom,mot_de_passe)
 
-    pool.query(`INSERT INTO utilisateur(nom,prenom,numero_tel,mot_de_passe,rank) VALUES ($1, $2, $3, $4 ,$5)`,
-    [nom, prenom, telephone, mot_de_passe, rank],
+    pool.query(`INSERT INTO utilisateur (nom,prenom,mot_de_passe,rank) 
+                VALUES ('${nom}','${prenom}','${mot_de_passe}','${rank}')`,
     (error, results) => {
-        if (error) {
-          throw error
-        }
-        res.status(200).send(`User bien ajouté`)
+        if (error) throw error;
+        res.status(200).send(`User bien ajouté`);
       }
     )
+
+    // La bonne version
+    // pool.query(`INSERT INTO utilisateur (nom,prenom,mot_de_passe,rank) 
+    //     VALUES ($1,$2,$3,$4)`,
+    // [nom,prenom,mot_de_passe,rank],
+    // (error, results) => {
+    //     if (error) throw error;
+    //     res.status(200).send(`User bien ajouté`);
+    // }
+    // )   
 }
+
 
 
 module.exports = {
