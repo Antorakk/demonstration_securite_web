@@ -1,0 +1,10 @@
+CREATE TABLE users(
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(50) NOT NULL,
+    prenom VARCHAR(50) NOT NULL,
+    nom VARCHAR(50) NOT NULL,
+    pwd VARCHAR(50) NOT NULL
+);
+
+
+INSERT INTO
