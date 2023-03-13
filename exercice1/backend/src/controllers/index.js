@@ -40,8 +40,28 @@ const postUser = async(req,res) => {
     // )   
 }
 
+const bestPostUser = async(req,res) => {
+    
+    const { prenom,nom,mot_de_passe } = req.body
+    const rank = '1'
+    console.log(req.body)
+
+    console.log(prenom,nom,mot_de_passe)
+
+    // La bonne version
+    pool.query(`INSERT INTO utilisateur (nom,prenom,mot_de_passe,rank) 
+        VALUES ($1,$2,$3,$4)`,
+    [nom,prenom,mot_de_passe,rank],
+    (error, results) => {
+        if (error) throw error;
+        res.status(200).send(`User bien ajouté`);
+    }
+    )  
+}
+
+
 
 
 module.exports = {
-    getUsers,postUser
+    getUsers,postUser,bestPostUser
 }
