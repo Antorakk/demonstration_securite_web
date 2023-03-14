@@ -4,6 +4,7 @@ const nodemailer=require('nodemailer');
 const otp = require('otp-generator')
 const bcrypt = require('bcrypt');
 const otpGenerator = require('otp-generator')
+const path = require('path')
 
 const app = express()
 require('dotenv').config();
@@ -25,9 +26,8 @@ let transporter = nodemailer.createTransport({
     }
 })
 
-app.get('/',(req,res)=>{
-    res.sendFile(__dirname + '/form.html')
-})
+const publicPath = path.join(__dirname+'/public')
+app.use(express.static(publicPath))
 
 app.post('/send-mail',(req,res) => {
     let email = req.body.mail;
