@@ -18,6 +18,15 @@ app.use(express.static(publicPath))
 const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false })
 
 
+const { Pool } = require('pg');
+const pool = new Pool({
+    host:'127.0.0.1',
+    user:'antorak',
+    password:'antorak123',
+    database:'testsecuweb',
+    port:'5433'
+})
+
 let transporter = nodemailer.createTransport({
     host:"localhost",
     port:465,
@@ -35,30 +44,36 @@ app.get('/',(req,res) =>{
 
 app.post('/send-mail',(req,res) => {
 
-    let pwd = 'exemplemdp'
-    hashPwd(pwd)
-        .then(function(result){
-            console.log(result)
-        })
     
-        
     let email = req.body.mail;
-
-    const mailOptions = {
-        from:"supportIUT@gmail.com",
-        to: email,
-        subject : "Otp for registration : " ,
-        html:"<h3> OTP for account verification is </h3><h1>"+otp+"</h1>"
-    }
-
-    transporter.sendMail(mailOptions,(error,info) => {
-        if (error){
-            console.log(error)
-        }
-        console.log(`Message envoyé : ${info.messageId}`);
-        console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
-    })
-    res.sendFile(__dirname+'/public/otp.html')
+    pool.query(`Select * from users where email='${email}'`).then(
+        (result) =>{
+            let hashpwd = result.rows[0].pwd
+            console.log(hashpwd)
+            let pwd = req.body.password
+            checkUser(pwd,hashpwd).then(function(result){
+                if (result){
+                    const mailOptions = {
+                        from:"supportIUT@gmail.com",
+                        to: email,
+                        subject : "Otp for registration : " ,
+                        html:"<h3> OTP for account verification is </h3><h1>"+otp+"</h1>"
+                    }
+                
+                    transporter.sendMail(mailOptions,(error,info) => {
+                        if (error){
+                            console.log(error)
+                        }
+                        console.log(`Message envoyé : ${info.messageId}`);
+                        console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
+                    })
+                    res.sendFile(__dirname+'/public/otp.html')
+                }
+                else{
+                    console.log('Mdp incorrect')
+                }
+            })
+        });
 })
 
 app.post('/verify',(req,res) => {
