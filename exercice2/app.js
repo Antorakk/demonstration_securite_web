@@ -1,7 +1,6 @@
 const express = require('express')
 const bodyparser=require('body-parser');
 const nodemailer=require('nodemailer');
-const otp = require('otp-generator')
 const bcrypt = require('bcrypt');
 const otpGenerator = require('otp-generator')
 const path = require('path')
@@ -15,6 +14,7 @@ app.use(bodyparser.json());
 const publicPath = path.join(__dirname+'/public')
 app.use(express.static(publicPath))
 
+const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false })
 
 let transporter = nodemailer.createTransport({
     host:"localhost",
@@ -34,7 +34,6 @@ app.get('/',(req,res) =>{
 app.post('/send-mail',(req,res) => {
 
     let email = req.body.mail;
-    let otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false })
 
     const mailOptions = {
         from:"supportIUT@gmail.com",
@@ -51,6 +50,15 @@ app.post('/send-mail',(req,res) => {
         console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
     })
     res.sendFile(__dirname+'/public/otp.html')
+})
+
+app.post('/verify',(req,res) => {
+    if (req.body.otp == otp) {
+        res.send("Connexion réussi !");
+    }
+    else {
+        res.send('Incorrect ! ')
+    }
 })
 
 
