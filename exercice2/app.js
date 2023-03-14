@@ -8,7 +8,6 @@ const path = require('path')
 
 const app = express()
 require('dotenv').config();
-const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(bodyparser.urlencoded({extended : false}));
@@ -48,11 +47,17 @@ app.post('/send-mail',(req,res) => {
         if (error){
             console.log(error)
         }
+        console.log(`Message envoyé : ${info.messageId}`);
+        console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
     })
-    res.status(201).send("Message bien envoyé")
+    res.sendFile(__dirname+'/public/otp.html')
 })
 
 
+
+
+// Gestion du PORT
+const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{
     console.log(`Server on port : ${PORT}`)
 });
