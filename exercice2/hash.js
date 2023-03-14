@@ -12,7 +12,7 @@ const hashPwd = async(password) => {
     )
 }
 
-const checkUser = async(username,password,hash) => {
+const checkUser = async(password,hash) => {
     return new Promise((resolve) => {
         bcrypt.compare(password, hash, (err, res) => {
             resolve(res)
@@ -20,15 +20,6 @@ const checkUser = async(username,password,hash) => {
     }
     ) 
 }
-let pwd = 'pwdantoine'
-let username = 'antorak'
-hashPwd(pwd).then(function(result){
-        console.log(result)
-        checkUser('antorak',pwd,'banane').then(function(result){
-            console.log(result)
-        })
-    })
-
 
 module.exports = {
     checkUser,
