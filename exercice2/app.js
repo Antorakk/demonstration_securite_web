@@ -3,7 +3,8 @@ const bodyparser=require('body-parser');
 const nodemailer=require('nodemailer');
 const bcrypt = require('bcrypt');
 const otpGenerator = require('otp-generator')
-const path = require('path')
+const path = require('path');
+const { checkUser,hashPwd } = require('./hash');
 
 const app = express()
 require('dotenv').config();
@@ -15,6 +16,7 @@ const publicPath = path.join(__dirname+'/public')
 app.use(express.static(publicPath))
 
 const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false })
+
 
 let transporter = nodemailer.createTransport({
     host:"localhost",
@@ -33,6 +35,13 @@ app.get('/',(req,res) =>{
 
 app.post('/send-mail',(req,res) => {
 
+    let pwd = 'exemplemdp'
+    hashPwd(pwd)
+        .then(function(result){
+            console.log(result)
+        })
+    
+        
     let email = req.body.mail;
 
     const mailOptions = {
