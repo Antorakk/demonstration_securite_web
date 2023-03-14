@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(bodyparser.urlencoded({extended : false}));
 app.use(bodyparser.json());
+const publicPath = path.join(__dirname+'/public')
+app.use(express.static(publicPath))
 
 
 let transporter = nodemailer.createTransport({
@@ -26,10 +28,12 @@ let transporter = nodemailer.createTransport({
     }
 })
 
-const publicPath = path.join(__dirname+'/public')
-app.use(express.static(publicPath))
+app.get('/',(req,res) =>{
+    res.sendFile(__dirname+'/public/form.html')
+})
 
 app.post('/send-mail',(req,res) => {
+
     let email = req.body.mail;
     let otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false })
 
