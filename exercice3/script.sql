@@ -9,7 +9,7 @@ CREATE TABLE users(
 
 INSERT INTO users(email,prenom,nom,pwd) VALUES(
     'anthony76520.ae@gmail.com','anthony','eluecque','$2b$10$6TLYe/p/eK/CGcXRZ5VVjeuwfJqqjSszX7nTB7RBERPtFITzWzDMq'
-)
+);
 
 
 INSERT INTO users(email,prenom,nom,pwd) VALUES(
