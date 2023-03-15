@@ -1,7 +1,6 @@
 const express = require('express')
 const bodyparser=require('body-parser');
 const nodemailer=require('nodemailer');
-const bcrypt = require('bcrypt');
 const otpGenerator = require('otp-generator')
 const path = require('path');
 const { checkUser,hashPwd } = require('./hash');
@@ -14,6 +13,7 @@ app.use(bodyparser.urlencoded({extended : false}));
 app.use(bodyparser.json());
 const publicPath = path.join(__dirname+'/public')
 app.use(express.static(publicPath))
+
 
 const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false })
 
@@ -33,8 +33,8 @@ let transporter = nodemailer.createTransport({
     secure:true,
     service:'gmail',
     auth:{
-        user:process.env.USER_MAIL,
-        pass:process.env.USER_PWD
+        user : process.env.USER_MAIL,
+        pass : process.env.USER_PWD
     }
 })
 
@@ -64,8 +64,8 @@ app.post('/send-mail',(req,res) => {
                         if (error){
                             console.log(error)
                         }
-                        console.log(`Message envoyé : ${info.messageId}`);
-                        console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
+                        // console.log(`Message envoyé : ${info.messageId}`);
+                        // console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
                     })
                     res.sendFile(__dirname+'/public/otp.html')
                 }
@@ -78,7 +78,7 @@ app.post('/send-mail',(req,res) => {
 
 app.post('/verify',(req,res) => {
     if (req.body.otp == otp) {
-        res.send("Connexion réussi !");
+        res.sendFile(__dirname+'/public/edit.html')
     }
     else {
         res.send('Incorrect ! ')
