@@ -1,13 +1,13 @@
 const { Pool } = require('pg');
-const xssFilters = require('xss-filters');
+// const xssFilters = require('xss-filters');
 
 
 const pool = new Pool({
-    host:'127.0.0.1',
-    user:'antorak',
-    password:'antorak123',
-    database:'testsecuweb',
-    port:'5433'
+    host:'172.20.10.3',
+    user:'postgres',
+    password:'bacquet',
+    database:'testsecuwebb',
+    port:'5432'
 })
 
 const getUsers = async(req,res) => {
