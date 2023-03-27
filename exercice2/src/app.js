@@ -2,7 +2,11 @@ const express = require('express')
 const bodyparser = require('body-parser')
 const app = express();
 const path = require('path')
+var xss = require("xss");
 
+
+var html = xss('<script>alert("xss");</script>');
+console.log(html);
 app.use(express.json());
 app.use(bodyparser.urlencoded({extended : false}));
 app.use(bodyparser.json());
