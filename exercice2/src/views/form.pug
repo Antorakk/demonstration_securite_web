@@ -1,15 +1,14 @@
-doctype html
 html
   head
     title Mon super formulaire
     link(rel="stylesheet" href="styles.css")
-  body
+ 
 
   
 script.
   // apply function filterXSS in the same way
   var html = filterXSS('<script>alert("xss");</scr' + "ipt>");
-  alert(html);
+  
     
 
 form(method="post" action="/submit")
@@ -26,6 +25,8 @@ form(method="post" action="/submit")
   input#email(type="mot de passe" name="mot de passe" required)
 
   button(type="submit") Envoyer
+
+
 
 
 form(method="post" action="/submit")
