@@ -1,46 +1,27 @@
-html
-  head
-    title Mon super formulaire
-    link(rel="stylesheet" href="styles.css")
- 
-
-  
-script.
-  // apply function filterXSS in the same way
-  var html = filterXSS('<script>alert("xss");</scr' + "ipt>");
-  
-    
-
-form(method="post" action="/submit")
-  label(for="nom") Nom :
-  input#name(type="text" name="nom" required)
-
-  label(for="prenom") Prenom :
-  input#email(type="prenom" name="prenom" required)
-
-  label(for="email") Email :
-  input#email(type="email" name="email" required)
-
-  label(for="mot de passe") Mot de passe :
-  input#email(type="mot de passe" name="mot de passe" required)
-
-  button(type="submit") Envoyer
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  title Document
+  link(rel='stylesheet', href='styles.css')
 
 
+form(action='/', method='post')
+  label(for='prenom') Pr&eacute;nom :
+  input#prenom(type='text', name='prenom')
+  label(for='nom') Nom :
+  input#nom(type='text', name='nom')
+  label(for='mot_de_passe') Mot de passe :
+  input#mot_de_passe(type='text', name='mot_de_passe')  
+  input(type='submit', value='Envoyer')
 
 
-form(method="post" action="/submit")
-  label(for="nom") Nom :
-  input#name(type="text" name="nom" required)
-
-  label(for="prenom") Prenom :
-  input#email(type="prenom" name="prenom" required)
-
-  label(for="email") Email :
-  input#email(type="email" name="email" required)
-
-  label(for="mot de passe") Mot de passe :
-  input#email(type="mot de passe" name="mot de passe" required)
-
-  button(type="submit") Envoyer
-
+form(action='/good', method='post')
+  label(for='prenom') Pr&eacute;nom :
+  input#prenom(type='text', name='prenom')
+  label(for='nom') Nom :
+  input#nom(type='text', name='nom')
+  label(for='mot_de_passe') Mot de passe :
+  input#mot_de_passe(type='text', name='mot_de_passe')
+  input(type='submit', value='Envoyer')
