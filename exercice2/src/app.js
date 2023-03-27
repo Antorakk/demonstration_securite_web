@@ -1,6 +1,9 @@
 const {connectTodB} = require('./services/db/connexion')
 app = require("./routes/index.js")
 require('dotenv').config();
+var xss = require("xss");
+var html = xss('<script>alert("xss");</script>');
+console.log(html);
 
 
 const createServer = () => {
