@@ -1,0 +1,15 @@
+[
+    {
+        "prenom":"Anthony",
+        "nom":"ELUECQUE",
+        "password":"$2b$10$6TLYe/p/eK/CGcXRZ5VVjeuwfJqqjSszX7nTB7RBERPtFITzWzDMq",
+        "mail" : "anthony76520.ae@gmail.com"
+
+    },
+    {
+        "prenom":"Antoine",
+        "nom" : "Bacquet",
+        "password": "$2b$10$eYOZXkWtF2z8lP7VEDDfHO/6pdRzInrHLu5B7w68bQhUCvQaerunu",
+        "mail" : "antoinebacquet62@gmail.com"
+    }
+]
