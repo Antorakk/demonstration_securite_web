@@ -1,10 +1,45 @@
 doctype html
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
+html
+  head
+    title Mon super formulaire
+    link(rel="stylesheet" href="styles.css")
+  body
 
-    body 
-        h1 Welcome ! 
+  
+script.
+  // apply function filterXSS in the same way
+  var html = filterXSS('<script>alert("xss");</scr' + "ipt>");
+  alert(html);
+    
+
+form(method="post" action="/submit")
+  label(for="nom") Nom :
+  input#name(type="text" name="nom" required)
+
+  label(for="prenom") Prenom :
+  input#email(type="prenom" name="prenom" required)
+
+  label(for="email") Email :
+  input#email(type="email" name="email" required)
+
+  label(for="mot de passe") Mot de passe :
+  input#email(type="mot de passe" name="mot de passe" required)
+
+  button(type="submit") Envoyer
+
+
+form(method="post" action="/submit")
+  label(for="nom") Nom :
+  input#name(type="text" name="nom" required)
+
+  label(for="prenom") Prenom :
+  input#email(type="prenom" name="prenom" required)
+
+  label(for="email") Email :
+  input#email(type="email" name="email" required)
+
+  label(for="mot de passe") Mot de passe :
+  input#email(type="mot de passe" name="mot de passe" required)
+
+  button(type="submit") Envoyer
+
