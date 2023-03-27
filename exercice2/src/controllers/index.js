@@ -2,10 +2,10 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
     host:'127.0.0.1',
-    user:'antoinebac',
-    password:'bacquet',
+    user:'antorak',
+    password:'antorak123',
     database:'testsecuweb',
-    port:'5432'
+    port:'5433'
 })
 
 const getUsers = async(req,res) => {
