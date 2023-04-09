@@ -6,6 +6,7 @@ const loginUser = require('../controllers/loginUser');
 const required = require('express-required-fields')
 const mongoSanitize = require('express-mongo-sanitize');
 const { body } = require('express-validator');
+const editUser = require('../controllers/editUser');
 
 
 router.use(mongoSanitize())
@@ -17,5 +18,7 @@ router.post('/login-user',
     body('mail').isEmail(),
     body('password').isLength({min:5}),
     loginUser)
+
+router.post('/edit-user',editUser)
 
 module.exports = router;
