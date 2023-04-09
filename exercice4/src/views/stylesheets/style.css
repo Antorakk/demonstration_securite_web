@@ -22,7 +22,9 @@ label {
 }
 
 #mail,
-#password {
+#password,
+#nom,
+#prenom {
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -44,3 +46,4 @@ input[type="submit"]:hover {
     background-color: #3e8e41;
 }
   
+#hidden {display: None;}
