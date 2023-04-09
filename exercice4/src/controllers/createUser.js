@@ -1,24 +1,29 @@
 const { insertOne } = require("../services/db/crud");
 const { hashPwd } = require("../utils/hash");
-const config = require('../../config.json')
-
+const config = require('../../config.json');
+const sanitize = require("mongo-sanitize");
+const { Validator } = require("jsonschema");
+const schemaUser = require('../models/user')
 
 const users = config.tables.users
-
-
 const createUser = async (req,res) => {
 
     try {
+
+        const cleanUser = sanitize(req.query)
         const user = {
-            "nom":req.query.nom,
-            "prenom":req.query.prenom,
-            "mail":req.query.mail,
-            "password": await hashPwd(req.query.password),
+            "nom":cleanUser.nom,
+            "prenom":cleanUser.prenom,
+            "mail":cleanUser.mail,
+            "password": await hashPwd(cleanUser.password),
             "otp" : ""
         };
-
-        insertOne(users,user);
-        return res.status(200).json(user);
+        let validator = new Validator();
+        if (validator.validate(user,schemaUser).valid){
+            insertOne(users,user);
+            return res.status(200).json(user);
+        }
+        return res.status(400).send('Erreur, conflits')
         
     } catch (error) {
         throw error;
