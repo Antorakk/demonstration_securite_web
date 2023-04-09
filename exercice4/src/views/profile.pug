@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+    head
+        style
+            include ./stylesheets/style.css
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Exo4
+    body 
+        form(action="/edit-user" method="post")
+            
+            label(for="mail") Nouveau mail : 
+            input#mail(type="mail", name="mail")
+
+            label(for="nom") Nouveau nom : 
+            input#nom(type="text", name="nom")
+
+            label(for="prenom") Nouveau prénom : 
+            input#prenom(type="text", name="prenom")
+
+            label(for="password") Nouveau mot de passe 
+            input#password(type="password", name="password")
+
+            input#hidden(type="text" name="idItem" value= `${_idUser}`)
+
+
+            input(type="submit", value="Changer")
