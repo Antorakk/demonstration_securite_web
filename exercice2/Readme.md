@@ -15,25 +15,26 @@ Ces traces doivent répondre aux questions Qui ? Quoi ? Quand?
 
 - ### **1 Utilisation de Winston**
 
-Nous avons utilisé la librarie suivante: 
+Nous avons utilisé les librariessuivante: 
 <br> - ```npm install winston```
+<br> -```npm install winston-daily-rotate-file```
 
 <p>
-Cette librairie est utilisé pour créer un journal des événements de l'application, tels que les erreurs, les avertissements, les informations et les traces de modification. Ici elle est très utile afin de créer un JSON avec les modifications horodaté 
+Cette librairie ( winston ) est utilisé pour créer un journal des événements de l'application, tels que les erreurs, les avertissements, les informations et les traces de modification. Ici elle est très utile afin de créer un JSON avec les modifications horodaté et la librairie ( winston-daily-rotate-file ) permet de créer 1 fichier par jour.
 </p>
 
 
 - ### **2 Qui ? Quoi ? Quand ? **
 
 <p>
-afin de répondre au question qui ? quand ?  quoi ? , Nous avons créer UserprofileController.js qui définit les fonctions qui permettent de créer, lire, mettre à jour et supprimer des profils utilisateur en interagissant avec le modèle de données correspondant et userProfileChangesLogger.js est un middleware qui utilise le module de logging Winston pour enregistrer les informations de modification dans un fichier de journal. Il enregistre les informations suivantes :
+Afin de répondre au question qui ? quand ?  quoi ? , Nous avons créer UserprofileController.js qui définit les fonctions qui permettent de créer, lire, mettre à jour et supprimer des profils utilisateur en interagissant avec le modèle de données correspondant et userProfileChangesLogger.js est un middleware qui utilise le module de logging Winston pour enregistrer les informations de modification dans un fichier de journal. Il enregistre les informations suivantes :
 
 - L'heure de la modification
 - L'identifiant de l'utilisateur qui a effectué la modification
 - Les anciennes valeurs de profil
 - Les nouvelles valeurs de profil
     
-tout cela permet de répondre au questions qui ? quoi ? quand ? dans le JSON.
+Tout cela permet de répondre au questions qui ? quoi ? quand ? dans le JSON.
     
     
 
