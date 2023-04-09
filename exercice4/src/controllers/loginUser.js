@@ -16,15 +16,15 @@ const loginUser = async (req,res) => {
         }
         
         const user = {
-            "mail": req.body.mail,
-            "password" : req.body.password
+            mail: req.body.mail,
+            password : req.body.password
         };
         sanitize(user); // Eviter les injections noSQL
         const findResult = await findOne(users,{"mail":user.mail});
         const isValidPassword = await checkUser(user.password,findResult.password)
 
         if (isValidPassword){
-            return res.render("index")
+            return res.render("profile",{_idUser:findResult._id})
         }
         else{
             return res.send("Utilisateur inexistant !")
