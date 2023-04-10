@@ -37,10 +37,6 @@ const userProfileChangesLogger = winston.createLogger({
 
 app.use(express.json());
 
-// définir les routes pour le contrôleur userProfile
-const userProfileRoutes = require('./routes/userProfileRoutes');
-app.use('/user-profile', userProfileRoutes);
 
-module.exports = app;
 
 
