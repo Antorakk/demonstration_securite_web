@@ -1,0 +1,15 @@
+{
+    "timestamp": "2023-04-13T9:33:24.000Z",
+    "action": "Modification d'un utilisateur",
+    "details": {
+      "ancienNom": "Bacquet",
+      "nouveauNom": "Bacquette",
+      "ancienPrenom": "Antoine",
+      "nouveauPrenom": "Antoine",
+      "ancienMotDePasse": "1234",
+      "nouveauMotDePasse": "1234"
+    }
+  }
+  
+  
+  

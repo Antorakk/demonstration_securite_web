@@ -1,16 +1,19 @@
-const express = require('express');
-const app = express();
+const { Router } = require('express');
+const { getUsers, postUser, bestPostUser, modifUser } = require('../controllers');
+const bodyParser = require('body-parser')
 
-app.set("views",process.cwd()+"/src/views");
-app.set("view engine","pug");
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+const router = Router();
 
-app.get('/',(req,res) => {
-    res.render('form');
-})
+router.get('/users',getUsers);
+router.post('/',urlencodedParser,postUser)
+router.post('/best',urlencodedParser,bestPostUser)
+router.post('/modif',urlencodedParser,modifUser)
 
-module.exports = app;
+
+
+
+module.exports = router;
 
 
