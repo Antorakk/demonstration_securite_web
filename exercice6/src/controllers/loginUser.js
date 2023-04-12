@@ -22,8 +22,14 @@ export const loginUser = async (req,res) => {
         const findResult = await findOne(users,{"mail":user.mail});
         const isValidPassword = await checkUser(user.password,findResult.password)
 
+        const decryptedUser = {
+            nom : await decryptData(findResult.nom),
+            prenom : await decryptData(findResult.prenom),
+            mail : await  decryptData(findResult.mail),
+            password : findResult.password
+        };
         if (isValidPassword){
-            return res.render("profile",{_idUser:findResult._id})
+            return res.status(200).json(decryptedUser)
         }
         else{
             return res.send("Utilisateur inexistant !")
