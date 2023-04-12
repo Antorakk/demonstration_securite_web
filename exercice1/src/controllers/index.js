@@ -34,10 +34,6 @@ const bestPostUser = async(req,res) => {
     
     const { prenom,nom,mot_de_passe } = req.body
     const rank = '1'
-    console.log(req.body)
-
-    console.log(prenom,nom,mot_de_passe)
-
     // La bonne version
     pool.query(`INSERT INTO utilisateur (nom,prenom,mot_de_passe,rank) 
         VALUES ($1,$2,$3,$4)`,
